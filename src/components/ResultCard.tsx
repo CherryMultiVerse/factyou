@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExternalLink, Shield, AlertTriangle, CheckCircle, XCircle, HelpCircle, Search, Users, Building, Flag, Globe } from 'lucide-react';
+import { ExternalLink, Shield, AlertTriangle, CheckCircle, XCircle, HelpCircle, Search, Users, Building, Flag, Globe, AlertCircle } from 'lucide-react';
 import { FactCheckResult } from '../types';
 
 interface ResultCardProps {
@@ -14,6 +14,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ result }) => {
       case 'right': return 'from-red-500 to-red-600';
       case 'international': return 'from-emerald-500 to-emerald-600';
       case 'external': return 'from-amber-500 to-amber-600';
+      case 'fringe': return 'from-orange-500 to-red-600';
       default: return 'from-neutral-500 to-neutral-600';
     }
   };
@@ -25,6 +26,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ result }) => {
       case 'right': return <Flag className="w-3 h-3" />;
       case 'international': return <Globe className="w-3 h-3" />;
       case 'external': return <Search className="w-3 h-3" />;
+      case 'fringe': return <AlertTriangle className="w-3 h-3" />;
       default: return <HelpCircle className="w-3 h-3" />;
     }
   };
@@ -36,6 +38,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ result }) => {
       case 'right': return '🟥 Right';
       case 'international': return '🌍 Global';
       case 'external': return '🔍 Fact Check';
+      case 'fringe': return '⚠️ Fringe';
       default: return category;
     }
   };
@@ -47,6 +50,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ result }) => {
       case 'right': return 'spectrum-hover-right';
       case 'international': return 'spectrum-hover-international';
       case 'external': return 'hover:bg-amber-500/20';
+      case 'fringe': return 'hover:bg-orange-500/20';
       default: return '';
     }
   };
@@ -98,11 +102,29 @@ const ResultCard: React.FC<ResultCardProps> = ({ result }) => {
     return <ExternalLink className="w-3 h-3" />;
   };
 
+  // Check if this is a fringe source
+  const isFringeSource = result.category === 'fringe' || result.warning;
+
   return (
-    <div className="bg-neutral-800/40 backdrop-blur-xl rounded-2xl border border-neutral-700/30 overflow-hidden hover:bg-neutral-800/60 hover:border-neutral-600/40 transition-all duration-300 shadow-xl spectrum-glow">
+    <div className={`bg-neutral-800/40 backdrop-blur-xl rounded-2xl border overflow-hidden hover:bg-neutral-800/60 transition-all duration-300 shadow-xl spectrum-glow ${
+      isFringeSource ? 'border-orange-500/30' : 'border-neutral-700/30 hover:border-neutral-600/40'
+    }`}>
       <div className={`h-1 bg-gradient-to-r ${getCategoryColor(result.category)}`}></div>
       
       <div className="p-6 md:p-8">
+        {/* Warning Banner for Fringe Sources */}
+        {isFringeSource && (
+          <div className="mb-4 p-3 bg-orange-500/10 border border-orange-500/20 rounded-xl">
+            <div className="flex items-center space-x-2 mb-1">
+              <AlertCircle className="w-4 h-4 text-orange-400" />
+              <span className="text-orange-300 font-medium text-sm">Fringe Source Alert</span>
+            </div>
+            <p className="text-orange-200 text-xs">
+              {result.warning || 'This source may present alternative narratives. Verify through multiple credible sources.'}
+            </p>
+          </div>
+        )}
+
         <div className="flex items-start justify-between mb-6">
           <div className="flex items-center space-x-3 flex-1 min-w-0">
             {result.favicon && (
@@ -135,6 +157,15 @@ const ResultCard: React.FC<ResultCardProps> = ({ result }) => {
             <span className="text-xs text-neutral-300 font-medium">{result.credibilityScore}%</span>
           </div>
         </div>
+
+        {/* Source Specialty */}
+        {(result as any).specialty && (
+          <div className="mb-4">
+            <span className="text-xs text-gray-400 bg-neutral-700/30 px-2 py-1 rounded-full">
+              {(result as any).specialty}
+            </span>
+          </div>
+        )}
 
         <div className="flex items-center space-x-3 mb-6">
           {getRatingIcon(result.rating)}

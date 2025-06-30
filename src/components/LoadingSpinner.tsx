@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Brain, Search, BookOpen, BarChart3, CheckCircle, Lightbulb, Globe, Users, Building, Flag, Shield } from 'lucide-react';
+import { Brain, Search, BookOpen, BarChart3, CheckCircle, Lightbulb, Globe, Users, Building, Flag, Shield, AlertTriangle } from 'lucide-react';
 
 interface LoadingSpinnerProps {
   claim: string;
@@ -17,34 +17,34 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ claim }) => {
   // ENHANCED COMPREHENSIVE ANALYSIS TIMING - Total ~40-50 seconds for thorough fact-checking
   const loadingSteps = [
     {
-      message: 'Initializing comprehensive AI fact-checking systems...',
+      message: 'Initializing enhanced cross-spectrum fact-checking systems...',
       duration: 5000, // 5 seconds
-      description: '🌐 Booting neural networks and loading cross-spectrum source databases with credibility scoring'
+      description: '🌐 Booting neural networks and loading comprehensive source databases with credibility scoring and bias detection'
     },
     {
-      message: 'Deep-analyzing claim structure and extracting key entities...',
+      message: 'Deep-analyzing claim structure and detecting potential fringe narratives...',
       duration: 6000, // 6 seconds  
-      description: '🔍 AI is performing semantic analysis, entity extraction, and generating targeted search queries'
+      description: '🔍 AI performing semantic analysis, entity extraction, and fringe source detection for transparency'
     },
     {
-      message: 'Searching across comprehensive political spectrum sources...',
+      message: 'Searching across enhanced political spectrum including fringe sources...',
       duration: 15000, // 15 seconds - longest step for thorough searching
-      description: '📰 Querying left, center, right, international, and fact-checking databases in parallel'
+      description: '📰 Querying left, center, right, international, fact-checking, and labeled fringe sources for complete transparency'
     },
     {
-      message: 'AI analyzing content patterns and cross-referencing evidence...',
+      message: 'AI analyzing content patterns and cross-referencing with bias detection...',
       duration: 10000, // 10 seconds
-      description: '🧠 Deep neural analysis of source credibility, evidence quality, and cross-spectrum consensus'
+      description: '🧠 Deep neural analysis of source credibility, bias patterns, consensus detection, and cross-spectrum agreement'
     },
     {
-      message: 'Generating comprehensive verdict with maximum attitude...',
+      message: 'Generating comprehensive verdict with consensus analysis...',
       duration: 5000, // 5 seconds
-      description: '⚖️ Synthesizing cross-spectrum analysis into balanced, shareable verdict with signature wit'
+      description: '⚖️ Synthesizing cross-spectrum analysis into balanced verdict with partisan divide detection and fringe transparency'
     },
     {
-      message: 'Finalizing comprehensive analysis and adding BS-cutting commentary...',
+      message: 'Finalizing enhanced analysis with transparency reporting...',
       duration: 4000, // 4 seconds
-      description: '✅ Polishing the comprehensive verdict and adding maximum shareability across platforms'
+      description: '✅ Adding consensus insights, bias detection results, and maximum shareability with source transparency'
     }
   ];
 
@@ -61,11 +61,15 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ claim }) => {
   const criticalThinkingTips = [
     {
       tip: "Cross-spectrum analysis reveals truth better than echo chambers.",
-      explanation: "We check left, center, right, and international sources to cut through partisan spin and find consensus."
+      explanation: "We check left, center, right, international, and even fringe sources to cut through partisan spin and find consensus."
     },
     {
       tip: "Source credibility matters more than source popularity.",
-      explanation: "Reuters and AP have higher credibility scores than viral TikToks. Shocking, we know."
+      explanation: "Reuters and AP have higher credibility scores than viral TikToks. We weight sources by their track record, not their reach."
+    },
+    {
+      tip: "Fringe sources are included for transparency, not validation.",
+      explanation: "We show what fringe sources say but clearly label them. Transparency doesn't mean all perspectives are equally valid."
     },
     {
       tip: "If the headline ends in a question mark, it's probably clickbait.",
@@ -158,9 +162,18 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ claim }) => {
     {
       tip: "Absence of evidence isn't evidence of absence, but it's not evidence of presence either.",
       explanation: "Just because we can't prove something false doesn't make it true. The burden of proof is on the claim maker."
+    },
+    {
+      tip: "Partisan sources can still report facts, but check their framing.",
+      explanation: "Even biased sources can get facts right, but they might emphasize different aspects. Look for the full picture."
+    },
+    {
+      tip: "Consensus doesn't guarantee truth, but it's a strong indicator.",
+      explanation: "When experts across the political spectrum agree, pay attention. When they don't, dig deeper."
     }
   ];
 
+  // ENHANCED CATEGORIES with Fringe Source Detection
   const categories = [
     { 
       name: '🟦 Left', 
@@ -169,7 +182,7 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ claim }) => {
       bgColor: 'bg-blue-500/10', 
       borderColor: 'border-blue-400/20',
       indicatorClass: 'category-indicator-left',
-      sources: ['NPR', 'Guardian', 'Vox', 'CNN']
+      sources: ['Guardian', 'Vox', 'NPR', 'MSNBC']
     },
     { 
       name: '⚪ Center', 
@@ -187,7 +200,7 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ claim }) => {
       bgColor: 'bg-red-500/10', 
       borderColor: 'border-red-400/20',
       indicatorClass: 'category-indicator-right',
-      sources: ['WSJ', 'Fox News', 'NY Post', 'Daily Wire']
+      sources: ['National Review', 'Daily Wire', 'Fox News', 'WSJ']
     },
     { 
       name: '🌍 Global', 
@@ -206,6 +219,16 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ claim }) => {
       borderColor: 'border-amber-400/20',
       indicatorClass: 'category-indicator-external',
       sources: ['Snopes', 'FactCheck.org', 'PolitiFact', 'AP Fact Check']
+    },
+    { 
+      name: '⚠️ Fringe', 
+      icon: <AlertTriangle className="w-4 h-4" />,
+      color: 'from-orange-500 to-red-600', 
+      bgColor: 'bg-orange-500/10', 
+      borderColor: 'border-orange-400/20',
+      indicatorClass: 'category-indicator-fringe',
+      sources: ['ZeroHedge', 'Gateway Pundit', 'Breitbart'],
+      warning: true
     }
   ];
 
@@ -243,9 +266,9 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ claim }) => {
       sourcesTimer = setInterval(() => {
         setSourcesFound(prev => {
           const newCount = prev + 1;
-          return newCount > 18 ? 18 : newCount; // Cap at 18 sources
+          return newCount > 20 ? 20 : newCount; // Cap at 20 sources (including fringe)
         });
-      }, 700); // Find a new source every 700ms
+      }, 600); // Find a new source every 600ms
     }
     
     // Move to next step after duration
@@ -342,7 +365,7 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ claim }) => {
         
         <div className="space-y-8">
           <h3 className="text-2xl font-semibold text-white">
-            Comprehensive AI Analysis in Progress
+            Enhanced Cross-Spectrum Analysis in Progress
           </h3>
           
           <div className="bg-neutral-700/30 rounded-2xl p-6 border border-neutral-600/30">
@@ -364,25 +387,25 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ claim }) => {
               <div>Step {currentStep + 1} of {loadingSteps.length} • {Math.round(stepProgress)}% complete</div>
               <div>Total elapsed: {totalElapsed.toFixed(1)}s • Est. remaining: {Math.max(0, 45 - totalElapsed).toFixed(0)}s</div>
               {currentStep === 2 && sourcesFound > 0 && (
-                <div className="text-green-400">Sources found: {sourcesFound}/18 • Cross-spectrum coverage active</div>
+                <div className="text-green-400">Sources found: {sourcesFound}/20+ • Enhanced cross-spectrum coverage active</div>
               )}
             </div>
           </div>
         </div>
         
         {/* Enhanced source categories with COMPREHENSIVE timing */}
-        <div className="mt-12 flex justify-center gap-4">
+        <div className="mt-12 flex justify-center gap-3">
           {categories.map((category, index) => {
             // More realistic activation timing - activate during search step (step 2)
             const isSearchStep = currentStep === 2;
-            const isActive = isSearchStep && stepProgress > (index * 12); // Stagger activation
+            const isActive = isSearchStep && stepProgress > (index * 10); // Stagger activation
             const isCompleted = currentStep > 2;
-            const isAnalyzing = currentStep === 3 && index === Math.floor((stepProgress / 20) % 5);
+            const isAnalyzing = currentStep === 3 && index === Math.floor((stepProgress / 15) % 6);
             
             return (
               <div key={category.name} className="flex flex-col items-center space-y-3">
                 <div className={`
-                  relative w-20 h-20 rounded-2xl backdrop-blur-xl border transition-all duration-2000
+                  relative w-18 h-18 rounded-2xl backdrop-blur-xl border transition-all duration-2000
                   ${isCompleted
                     ? `${category.bgColor} ${category.borderColor} scale-105 opacity-90`
                     : isActive || isAnalyzing
@@ -391,6 +414,7 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ claim }) => {
                     ? `${category.bgColor} ${category.borderColor} scale-100 opacity-60`
                     : 'bg-neutral-800/20 border-neutral-700/30 scale-95 opacity-40'
                   }
+                  ${category.warning ? 'ring-2 ring-orange-500/30' : ''}
                 `}>
                   <div className={`
                     absolute inset-2 rounded-xl transition-all duration-2000
@@ -408,7 +432,7 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ claim }) => {
                     ${isActive || isAnalyzing ? 'scale-110' : 'scale-100'}
                   `}>
                     {isCompleted ? (
-                      <CheckCircle className="w-5 h-5 text-green-400" />
+                      <CheckCircle className="w-4 h-4 text-green-400" />
                     ) : isActive || isAnalyzing ? (
                       <div className="relative">
                         {category.icon}
@@ -420,6 +444,13 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ claim }) => {
                       <div className="w-2 h-2 rounded-full bg-neutral-500 opacity-30"></div>
                     )}
                   </div>
+                  
+                  {/* Warning indicator for fringe sources */}
+                  {category.warning && (isActive || isAnalyzing || isCompleted) && (
+                    <div className="absolute -top-1 -right-1">
+                      <AlertTriangle className="w-3 h-3 text-orange-400" />
+                    </div>
+                  )}
                 </div>
                 <span className={`
                   text-xs font-medium transition-colors duration-2000 text-center
@@ -443,6 +474,12 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ claim }) => {
                     {category.sources.slice(0, 2).join(', ')}
                   </div>
                 )}
+                {/* Warning for fringe sources */}
+                {category.warning && isActive && (
+                  <div className="text-xs text-orange-400 text-center max-w-20">
+                    Labeled
+                  </div>
+                )}
               </div>
             );
           })}
@@ -459,7 +496,7 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ claim }) => {
             </div>
             <span className="text-sm text-red-400 font-medium">Right</span>
           </div>
-          <p className="text-xs text-neutral-500">Comprehensive cross-spectrum analysis in progress</p>
+          <p className="text-xs text-neutral-500">Enhanced cross-spectrum analysis with fringe transparency</p>
         </div>
 
         {/* ENHANCED Critical Thinking Pro Tips Section with more educational content */}
@@ -505,7 +542,7 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ claim }) => {
               Step {currentStep + 1} of {loadingSteps.length} • {Math.round(totalProgress)}% overall
             </p>
             <p className="text-xs text-neutral-500">
-              Comprehensive AI Analysis Mode
+              Enhanced Cross-Spectrum Analysis
             </p>
           </div>
         </div>
@@ -516,28 +553,28 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ claim }) => {
             currentStep >= 1 ? 'bg-blue-500/10 border-blue-500/20 text-blue-300' : 'bg-neutral-700/20 border-neutral-600/20 text-neutral-500'
           }`}>
             <div className="font-medium">Neural Analysis</div>
-            <div className="text-xs opacity-75">Semantic processing</div>
+            <div className="text-xs opacity-75">Semantic + bias detection</div>
           </div>
           <div className={`p-3 rounded-xl border transition-all duration-2000 ${
             currentStep >= 3 ? 'bg-purple-500/10 border-purple-500/20 text-purple-300' : 'bg-neutral-700/20 border-neutral-600/20 text-neutral-500'
           }`}>
             <div className="font-medium">Cross-Spectrum</div>
-            <div className="text-xs opacity-75">Balanced coverage</div>
+            <div className="text-xs opacity-75">Consensus detection</div>
           </div>
           <div className={`p-3 rounded-xl border transition-all duration-2000 ${
             currentStep >= 5 ? 'bg-red-500/10 border-red-500/20 text-red-300' : 'bg-neutral-700/20 border-neutral-600/20 text-neutral-500'
           }`}>
-            <div className="font-medium">Witty Summary</div>
-            <div className="text-xs opacity-75">Maximum shareability</div>
+            <div className="font-medium">Transparency</div>
+            <div className="text-xs opacity-75">Fringe source labeling</div>
           </div>
         </div>
 
-        {/* Comprehensive analysis disclaimer */}
+        {/* Enhanced analysis disclaimer */}
         <div className="mt-8 p-4 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-red-500/10 rounded-xl border border-purple-500/20">
-          <p className="spectrum-text text-sm font-medium mb-2">🚀 Comprehensive AI Analysis Active</p>
+          <p className="spectrum-text text-sm font-medium mb-2">🚀 Enhanced Cross-Spectrum Analysis Active</p>
           <p className="text-neutral-200 text-xs leading-relaxed">
-            This system uses advanced neural networks to perform comprehensive fact-checking across the political spectrum, 
-            analyzing credibility scores, cross-referencing evidence, and generating balanced results with maximum attitude and minimum BS.
+            This enhanced system analyzes claims across the complete political spectrum including clearly labeled fringe sources for transparency. 
+            We detect consensus, identify partisan divides, and provide maximum transparency with attitude and minimum BS.
           </p>
         </div>
       </div>
