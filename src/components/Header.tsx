@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Scale, X, HelpCircle, User, LogIn, LogOut, UserPlus } from 'lucide-react';
+import { X, HelpCircle, User, LogIn, LogOut, UserPlus } from 'lucide-react';
 import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient(
@@ -129,8 +129,12 @@ const Header: React.FC<HeaderProps> = ({ user, onAuthRequest }) => {
               onClick={() => window.location.reload()}
               className="flex items-center space-x-3 hover:opacity-80 transition-opacity"
             >
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-red-500 rounded-lg flex items-center justify-center">
-                <Scale className="w-5 h-5 text-white" />
+              <div className="w-10 h-10 rounded-lg flex items-center justify-center">
+                <img 
+                  src="/middlefingernotext.png" 
+                  alt="FactYou! Logo" 
+                  className="w-10 h-10 object-contain"
+                />
               </div>
               <div>
                 <h1 className="text-xl font-bold text-white">FactYou!</h1>
