@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Facebook, CheckCircle, Mail, Instagram, MessageCircle, X, Shield, FileText, Heart } from 'lucide-react';
+import { Facebook, CheckCircle, Mail, Instagram, MessageCircle, X, Shield, FileText, Heart, Zap } from 'lucide-react';
 import DonationModal from './DonationModal';
 
 // Updated X (Twitter) icon component
@@ -473,6 +473,31 @@ const Footer: React.FC = () => {
               
               <div className="text-xs text-gray-500">
                 © 2025 FactYou!
+              </div>
+            </div>
+
+            {/* Built on Bolt Badge - Hackathon Special */}
+            <div className="mt-6 pt-6 border-t border-white/5">
+              <div className="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0">
+                <div className="flex items-center space-x-3">
+                  <a
+                    href="https://bolt.new"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-purple-500/20 to-blue-500/20 hover:from-purple-500/30 hover:to-blue-500/30 border border-purple-500/30 rounded-xl text-purple-300 hover:text-purple-200 transition-all duration-300 group"
+                  >
+                    <Zap className="w-4 h-4 group-hover:animate-pulse" />
+                    <span className="text-sm font-medium">Built on Bolt</span>
+                    <div className="w-1 h-1 bg-purple-400 rounded-full animate-pulse"></div>
+                  </a>
+                  <span className="text-xs text-gray-500">
+                    Hackathon 2025 Entry
+                  </span>
+                </div>
+                
+                <div className="text-xs text-gray-500 text-center sm:text-right">
+                  <p>Powered by AI • Built with ❤️ • Fighting misinformation one fact at a time</p>
+                </div>
               </div>
             </div>
           </div>
