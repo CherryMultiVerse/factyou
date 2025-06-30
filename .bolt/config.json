@@ -1,0 +1,48 @@
+export const config = {
+  runtime: 'edge',
+};
+
+export default async function handler(req: Request) {
+  if (req.method !== 'POST') {
+    return new Response(JSON.stringify({ error: 'Method not allowed' }), {
+      status: 405,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+
+  const body = await req.json();
+  const { claim } = body;
+
+  if (!claim) {
+    return new Response(JSON.stringify({ error: 'Missing claim' }), {
+      status: 400,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+
+  return new Response(
+    JSON.stringify({
+      claim,
+      overallRating: 'UNVERIFIED',
+      confidence: 42,
+      tweetableSummary: `"${claim}" — unverified, but kinda sus.`,
+      results: [
+        {
+          id: 'demo-1',
+          source: 'Test News',
+          category: 'center',
+          rating: 'unverified',
+          summary: 'No solid data found yet.',
+          url: 'https://example.com',
+          credibilityScore: 50,
+          favicon: 'https://www.google.com/s2/favicons?domain=example.com&sz=32',
+        },
+      ],
+      analysisTime: 0,
+    }),
+    {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    }
+  );
+}
